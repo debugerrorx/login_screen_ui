@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:login_screen/utils/helper_functions.dart';
 
 import '../../../utils/constants.dart';
+import '../animations/change_screen_animation.dart';
 import 'bottom_text.dart';
 import 'top_text.dart';
 
@@ -10,8 +12,17 @@ enum Screens {
   welcomeBack,
 }
 
-class LoginContent extends StatelessWidget {
+class LoginContent extends StatefulWidget {
   const LoginContent({Key? key}) : super(key: key);
+
+  @override
+  State<LoginContent> createState() => _LoginContentState();
+}
+
+class _LoginContentState extends State<LoginContent>
+    with TickerProviderStateMixin {
+  late final List<Widget> createAccountContent;
+  late final List<Widget> loginContent;
 
   Widget inputField(String hint, IconData iconData) {
     return Padding(
@@ -128,15 +139,61 @@ class LoginContent extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
-    const currentScreen = Screens.createAccount;
+  void initState() {
+    createAccountContent = [
+      inputField('Name', Ionicons.person_outline),
+      inputField('Email', Ionicons.mail_outline),
+      inputField('Password', Ionicons.lock_closed_outline),
+      loginButton('Sign Up'),
+      orDivider(),
+      logos(),
+    ];
 
+    loginContent = [
+      inputField('Email', Ionicons.mail_outline),
+      inputField('Password', Ionicons.lock_closed_outline),
+      loginButton('Log In'),
+      forgotPassword(),
+    ];
+
+    ChangeScreenAnimation.initialize(
+      vsync: this,
+      createAccountItems: createAccountContent.length,
+      loginItems: loginContent.length,
+    );
+
+    for (var i = 0; i < createAccountContent.length; i++) {
+      createAccountContent[i] = HelperFunctions.wrapWithAnimatedBuilder(
+        animation: ChangeScreenAnimation.createAccountAnimations[i],
+        child: createAccountContent[i],
+      );
+    }
+
+    for (var i = 0; i < loginContent.length; i++) {
+      loginContent[i] = HelperFunctions.wrapWithAnimatedBuilder(
+        animation: ChangeScreenAnimation.loginAnimations[i],
+        child: loginContent[i],
+      );
+    }
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    ChangeScreenAnimation.dispose();
+
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Stack(
       children: [
         const Positioned(
           top: 136,
           left: 24,
-          child: TopText(screen: currentScreen),
+          child: TopText(),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 100),
@@ -145,21 +202,12 @@ class LoginContent extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: currentScreen == Screens.createAccount
-                    ? [
-                        inputField('Name', Ionicons.person_outline),
-                        inputField('Email', Ionicons.mail_outline),
-                        inputField('Password', Ionicons.lock_closed_outline),
-                        loginButton('Sign Up'),
-                        orDivider(),
-                        logos(),
-                      ]
-                    : [
-                        inputField('Email', Ionicons.mail_outline),
-                        inputField('Password', Ionicons.lock_closed_outline),
-                        loginButton('Log In'),
-                        forgotPassword(),
-                      ],
+                children: createAccountContent,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: loginContent,
               ),
             ],
           ),
@@ -168,7 +216,7 @@ class LoginContent extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Padding(
             padding: EdgeInsets.only(bottom: 50),
-            child: BottomText(screen: currentScreen),
+            child: BottomText(),
           ),
         ),
       ],
