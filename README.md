@@ -2,6 +2,24 @@
 
 This project is all about designing a Login Screen with a modern UI using the latest features offered by Flutter. In a total of three parts we will create a unique background using Glassmorphism, design appealing input fields for the best user experience and include eye-caching animations for a smooth feeling.
 
+<br>
+
+---
+
+<br>
+
+If you like this kind of content, you can leave a donation here:
+
+[**Donate to DebugErrorX**](https://bit.ly/DebugErrorXDonations)
+
+This way I'm able to continue producing high quality videos for you.
+
+<br>
+
+---
+
+<br>
+
 ## [Watch it on YouTube](https://www.youtube.com/playlist?list=PLz3ulyTHbIEcUKeDqTAMPDsNu3VERlwm9)
 
 <br>
