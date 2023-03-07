@@ -3,6 +3,11 @@ import 'package:login_screen/screens/login_screen/animations/change_screen_anima
 import 'package:login_screen/utils/helper_functions.dart';
 
 import 'login_content.dart';
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class TopText extends StatefulWidget {
   const TopText({Key? key}) : super(key: key);

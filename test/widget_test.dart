@@ -9,6 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:login_screen/main.dart';
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

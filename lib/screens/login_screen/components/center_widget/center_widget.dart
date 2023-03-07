@@ -4,6 +4,11 @@ import 'package:flutter/material.dart';
 
 import 'center_widget_clipper.dart';
 import 'center_widget_painter.dart';
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 class CenterWidget extends StatelessWidget {
   final Size size;

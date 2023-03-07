@@ -6,6 +6,11 @@ import '../../../utils/constants.dart';
 import '../animations/change_screen_animation.dart';
 import 'bottom_text.dart';
 import 'top_text.dart';
+import 'dart:async';
+
+import 'package:flutter/widgets.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 enum Screens {
   createAccount,
